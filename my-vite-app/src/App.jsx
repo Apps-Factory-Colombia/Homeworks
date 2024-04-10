@@ -6,6 +6,7 @@ const bookStack = new Stack();
 
 bookStack.push({ name: '1984', isbn: '1234567890', author: 'George Orwell', editorial: 'Secker & Warburg' });
 bookStack.push({ name: 'El Principito', isbn: '1122334455', author: 'Antoine de Saint-Exupéry', editorial: 'Reynal & Hitchcock' });
+bookStack.push({ name: 'El Principito 2', isbn: '112233445125', author: 'Antoine de Saint-Exupéry', editorial: 'Reynal & Hitchcock' });
 
 function App() {
   const [books, setBooks] = useState(bookStack.print());
