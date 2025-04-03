@@ -1,58 +1,45 @@
-import { useState } from "react";
+import React, { useState, useCallback } from "react";
 
-const CategoryInput = ({ setCategories }) => {
-  const [category, setCategory] = useState("");
-
-  const handleInputChange = (event) => {
-    setCategory(event.target.value);
-  };
-
-  const handleAddCategory = () => {
-    if (category.trim() !== "") {
-      setCategories((prevCategories) => [...prevCategories, category]);
-      setCategory("");
-    }
-  };
+const Son = ({ numero, increment }) => {
+  console.log("Rendered:", numero);
 
   return (
-    <div className="flex flex-col items-center p-4">
-      <input
-        type="text"
-        value={category}
-        onChange={handleInputChange}
-        placeholder="Enter category"
-        className="px-4 py-2 border rounded-lg mb-2"
-      />
-      <button
-        onClick={handleAddCategory}
-        className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-      >
-        Add Category
-      </button>
+    <button
+      className="btn btn-primary mr-3"
+      onClick={() => increment(numero)}
+    >
+      {numero}
+    </button>
+  );
+};
+
+const Father = () => {
+  const list = [2, 4, 6, 8, 10];
+  const [valor, setValor] = useState(0);
+
+  const increment = useCallback((num) => {
+    setValor((prev) => prev + num);
+  }, []);
+
+  return (
+    <div className="p-4 text-center">
+      <h1>Father</h1>
+      <p className="text-lg font-bold">Total: {valor}</p>
+      <div className="flex justify-center space-x-2">
+        {list.map((n, idx) => (
+          <Son key={idx} numero={n} increment={increment} />
+        ))}
+      </div>
     </div>
   );
 };
 
-const CategoryList = ({ categories }) => {
+const App = () => {
   return (
-    <ul className="list-disc mt-4">
-      {categories.map((category, index) => (
-        <li key={index} className="text-lg">{category}</li>
-      ))}
-    </ul>
-  );
-};
-
-const ComponentApp = () => {
-  const [categories, setCategories] = useState([]);
-
-  return (
-    <div className="flex flex-col items-center p-4 border rounded-lg shadow-md w-64 mx-auto mt-10">
-      <h1 className="text-2xl font-bold">Categories</h1>
-      <CategoryInput setCategories={setCategories} />
-      <CategoryList categories={categories} />
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <Father />
     </div>
   );
 };
 
-export default ComponentApp;
+export default App;
