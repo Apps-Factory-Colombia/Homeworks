@@ -1,43 +1,49 @@
 import React, { useState } from 'react';
-import { Queue } from './Queue';
+import { useSelector, useDispatch } from 'react-redux';
+import { increment, decrement, incrementBy } from './redux/counterSlice';
+import { push, pop } from './redux/stackSlice';
 
-const peopleQueue = new Queue();
-
-// Datos 
-peopleQueue.enqueue({ name: 'Ana', amount: 50000 });
-peopleQueue.enqueue({ name: 'Luis', amount: 20000 });
-peopleQueue.enqueue({ name: 'Pepe', amount: 20000 });
-peopleQueue.enqueue({ name: 'Tony', amount: 10000 });
 function App() {
-  const [queue, setQueue] = useState(peopleQueue.print());
-  const [form, setForm] = useState({ name: '', amount: '' });
+  const counter = useSelector((state) => state.counter.value);
+  const stack = useSelector((state) => state.stack);
+  const dispatch = useDispatch();
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    peopleQueue.enqueue({ name: form.name, amount: parseInt(form.amount, 10) });
-    setQueue(peopleQueue.print());
-    setForm({ name: '', amount: '' });
-  };
+  const [amount, setAmount] = useState(0);
+  const [stackInput, setStackInput] = useState('');
 
   return (
     <div style={{ padding: '2rem' }}>
-      <h1>🏧 ATM Queue</h1>
-      <form onSubmit={handleSubmit}>
-        <input name="name" placeholder="Name" value={form.name} onChange={handleChange} required />
-        <input name="amount" type="number" placeholder="Withdrawal Amount" value={form.amount} onChange={handleChange} required />
-        <button type="submit">Add to Queue</button>
-      </form>
+      <h1>🔢 Counter</h1>
+      <p>Value: {counter}</p>
+      <button onClick={() => dispatch(increment())}>Increment</button>
+      <button onClick={() => dispatch(decrement())}>Decrement</button>
+      <input
+        type="number"
+        value={amount}
+        onChange={(e) => setAmount(Number(e.target.value))}
+        placeholder="Increment by..."
+      />
+      <button onClick={() => dispatch(incrementBy(amount))}>Increment by</button>
 
-      <h2>👥 People in Queue</h2>
+      <hr />
+
+      <h1>📚 Stack</h1>
+      <input
+        value={stackInput}
+        onChange={(e) => setStackInput(e.target.value)}
+        placeholder="Push to stack"
+      />
+      <button onClick={() => {
+        dispatch(push(stackInput));
+        setStackInput('');
+      }}>
+        Push
+      </button>
+      <button onClick={() => dispatch(pop())}>Pop</button>
+
       <ul>
-        {queue.map((person, index) => (
-          <li key={index}>
-            <strong>{person.name}</strong> - Withdrawal: ${person.amount}
-          </li>
+        {[...stack].reverse().map((item, i) => (
+          <li key={i}>{item}</li>
         ))}
       </ul>
     </div>
