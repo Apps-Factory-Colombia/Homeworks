@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import { Stack } from './Stack';
+import { Queue } from './Queue';
 
-const bookStack = new Stack();
+const peopleQueue = new Queue();
 
-
-bookStack.push({ name: '1984', isbn: '1234567890', author: 'George Orwell', editorial: 'Secker & Warburg' });
-bookStack.push({ name: 'El Principito', isbn: '1122334455', author: 'Antoine de Saint-Exupéry', editorial: 'Reynal & Hitchcock' });
-bookStack.push({ name: '100 Años de Soledad', isbn: '112233445125', author: 'Grabriel Garcia Marques', editorial: 'Reynal & Hitchcock' });
+// Datos 
+peopleQueue.enqueue({ name: 'Ana', amount: 50000 });
+peopleQueue.enqueue({ name: 'Luis', amount: 20000 });
 
 function App() {
-  const [books, setBooks] = useState(bookStack.print());
-  const [form, setForm] = useState({ name: '', isbn: '', author: '', editorial: '' });
+  const [queue, setQueue] = useState(peopleQueue.print());
+  const [form, setForm] = useState({ name: '', amount: '' });
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -18,27 +17,25 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    bookStack.push(form);
-    setBooks(bookStack.print());
-    setForm({ name: '', isbn: '', author: '', editorial: '' });
+    peopleQueue.enqueue({ name: form.name, amount: parseInt(form.amount, 10) });
+    setQueue(peopleQueue.print());
+    setForm({ name: '', amount: '' });
   };
 
   return (
     <div style={{ padding: '2rem' }}>
-      <h1>📚 Book Stack</h1>
+      <h1>🏧 ATM Queue</h1>
       <form onSubmit={handleSubmit}>
-        <input name="name" placeholder="Book Name" value={form.name} onChange={handleChange} required />
-        <input name="isbn" placeholder="ISBN" value={form.isbn} onChange={handleChange} required />
-        <input name="author" placeholder="Author" value={form.author} onChange={handleChange} required />
-        <input name="editorial" placeholder="Editorial" value={form.editorial} onChange={handleChange} required />
-        <button type="submit">Add Book</button>
+        <input name="name" placeholder="Name" value={form.name} onChange={handleChange} required />
+        <input name="amount" type="number" placeholder="Withdrawal Amount" value={form.amount} onChange={handleChange} required />
+        <button type="submit">Add to Queue</button>
       </form>
 
-      <h2>📚 Stack of Books</h2>
+      <h2>👥 People in Queue</h2>
       <ul>
-        {books.map((book, index) => (
+        {queue.map((person, index) => (
           <li key={index}>
-            <strong>{book.name}</strong> - ISBN: {book.isbn} | Author: {book.author} | Editorial: {book.editorial}
+            <strong>{person.name}</strong> - Withdrawal: ${person.amount}
           </li>
         ))}
       </ul>
