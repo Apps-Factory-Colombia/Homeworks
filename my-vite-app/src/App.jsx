@@ -6,7 +6,7 @@ const peopleQueue = new Queue();
 // Datos 
 peopleQueue.enqueue({ name: 'Ana', amount: 50000 });
 peopleQueue.enqueue({ name: 'Luis', amount: 20000 });
-
+peopleQueue.enqueue({ name: 'Pepe', amount: 20000 });
 function App() {
   const [queue, setQueue] = useState(peopleQueue.print());
   const [form, setForm] = useState({ name: '', amount: '' });
