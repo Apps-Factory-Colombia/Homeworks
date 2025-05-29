@@ -54,7 +54,7 @@ function App() {
   // Renderizar componente basado en el estado de autenticación
   return (
     <div>
-      {isAuthenticated ? <Dashboard /> : <Login />}
+      <Dashboard />
     </div>
   );
 }
