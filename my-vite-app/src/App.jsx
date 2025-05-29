@@ -1,51 +1,60 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { increment, decrement, incrementBy } from './redux/counterSlice';
-import { push, pop } from './redux/stackSlice';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { useAuthState } from './hooks/useAuthState';
+import Login from './components/Login';
+import Dashboard from './components/Dashboard';
 
 function App() {
-  const counter = useSelector((state) => state.counter.value);
-  const stack = useSelector((state) => state.stack);
-  const dispatch = useDispatch();
+  // Hook personalizado para manejar el estado de autenticación
+  useAuthState();
 
-  const [amount, setAmount] = useState(0);
-  const [stackInput, setStackInput] = useState('');
+  const { isAuthenticated, isLoading } = useSelector((state) => state.auth);
 
-  return (
-    <div style={{ padding: '2rem' }}>
-      <h1>🔢 Contador</h1>
-      <p>Value: {counter}</p>
-      <button onClick={() => dispatch(increment())}>Increment</button>
-      <button onClick={() => dispatch(decrement())}>Decrement</button>
-      <input
-        type="number"
-        value={amount}
-        onChange={(e) => setAmount(Number(e.target.value))}
-        placeholder="Increment by..."
-      />
-      <button onClick={() => dispatch(incrementBy(amount))}>Increment by</button>
-
-      <hr />
-
-      <h1>📚 Stack</h1>
-      <input
-        value={stackInput}
-        onChange={(e) => setStackInput(e.target.value)}
-        placeholder="Push to stack"
-      />
-      <button onClick={() => {
-        dispatch(push(stackInput));
-        setStackInput('');
+  // Mostrar pantalla de carga mientras se verifica el estado de autenticación
+  if (isLoading) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#f5f5f5',
+        fontFamily: 'Arial, sans-serif'
       }}>
-        Push
-      </button>
-      <button onClick={() => dispatch(pop())}>Pop</button>
+        <div style={{
+          backgroundColor: 'white',
+          padding: '40px',
+          borderRadius: '12px',
+          boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+          textAlign: 'center'
+        }}>
+          <div style={{
+            fontSize: '50px',
+            marginBottom: '20px'
+          }}>
+            🔄
+          </div>
+          <h2 style={{
+            color: '#333',
+            margin: '0 0 10px 0'
+          }}>
+            Cargando...
+          </h2>
+          <p style={{
+            color: '#666',
+            margin: 0
+          }}>
+            Verificando estado de autenticación
+          </p>
+        </div>
+      </div>
+    );
+  }
 
-      <ul>
-        {[...stack].reverse().map((item, i) => (
-          <li key={i}>{item}</li>
-        ))}
-      </ul>
+  // Renderizar componente basado en el estado de autenticación
+  return (
+    <div>
+      {isAuthenticated ? <Dashboard /> : <Login />}
     </div>
   );
 }
