@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/authSlice';
 import FirestoreManager from './FirestoreManager';
+import RealtimeChat from './RealtimeChat';
 
 const Dashboard = () => {
     const dispatch = useDispatch();
@@ -13,8 +14,8 @@ const Dashboard = () => {
     };
 
     const tabStyle = (isActive) => ({
-        padding: '12px 24px',
-        margin: '0 5px',
+        padding: '12px 20px',
+        margin: '0 3px',
         border: 'none',
         backgroundColor: isActive ? '#007bff' : '#f8f9fa',
         color: isActive ? 'white' : '#333',
@@ -50,7 +51,7 @@ const Dashboard = () => {
                         color: '#333',
                         fontSize: '24px'
                     }}>
-                        🔥 Challenge 11 & 12 - Firebase App
+                        🔥 Challenge 11, 12 & 13 - Firebase App
                     </h1>
 
                     <button
@@ -84,7 +85,9 @@ const Dashboard = () => {
                     margin: '0 auto',
                     padding: '0 20px',
                     display: 'flex',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    flexWrap: 'wrap',
+                    gap: '5px'
                 }}>
                     <button
                         style={tabStyle(activeTab === 'profile')}
@@ -98,6 +101,12 @@ const Dashboard = () => {
                     >
                         🔥 Firestore CRUD
                     </button>
+                    <button
+                        style={tabStyle(activeTab === 'chat')}
+                        onClick={() => setActiveTab('chat')}
+                    >
+                        💬 Chat en Tiempo Real
+                    </button>
                 </div>
             </div>
 
@@ -105,7 +114,7 @@ const Dashboard = () => {
             <div style={{
                 maxWidth: '1200px',
                 margin: '0 auto',
-                padding: '40px 20px'
+                padding: activeTab === 'chat' ? '20px 20px' : '40px 20px'
             }}>
                 {activeTab === 'profile' ? (
                     // Profile Tab Content
@@ -287,22 +296,25 @@ const Dashboard = () => {
                                         color: '#9c27b0',
                                         fontSize: '16px'
                                     }}>
-                                        🎯 Próximos Challenges
+                                        💬 Challenge 13: Chat en Tiempo Real
                                     </h4>
                                     <p style={{
                                         margin: 0,
                                         color: '#495057',
                                         fontSize: '14px'
                                     }}>
-                                        ¡Explora la pestaña Firestore CRUD para probar las operaciones de base de datos!
+                                        Sistema de mensajería instantánea usando Firebase Realtime Database.
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </>
-                ) : (
+                ) : activeTab === 'firestore' ? (
                     // Firestore Tab Content
                     <FirestoreManager />
+                ) : (
+                    // Chat Tab Content
+                    <RealtimeChat />
                 )}
             </div>
         </div>

@@ -1,6 +1,6 @@
-# 🔥 Challenge 11 & 12 - Firebase Authentication + Firestore CRUD
+# 🔥 Challenge 11, 12 & 13 - Firebase Authentication + Firestore CRUD + Realtime Chat
 
-Este proyecto implementa un sistema completo de autenticación y gestión de datos usando **Firebase** y **Redux** según los requisitos de los Challenges 11 y 12.
+Este proyecto implementa un sistema completo de autenticación, gestión de datos y chat en tiempo real usando **Firebase** y **Redux** según los requisitos de los Challenges 11, 12 y 13.
 
 ## ✅ Funcionalidades Implementadas
 
@@ -15,12 +15,20 @@ Este proyecto implementa un sistema completo de autenticación y gestión de dat
 3. **✏️ UPDATE** - Actualizar documentos existentes en Firestore
 4. **🗑️ DELETE** - Eliminar documentos de Firestore
 
+### Challenge 13 - Chat en Tiempo Real
+1. **💬 Mensajería Instantánea** - Envío y recepción de mensajes en tiempo real
+2. **👥 Multi-usuario** - Chat compartido entre todos los usuarios conectados
+3. **🔄 Sincronización Automática** - Los mensajes aparecen instantáneamente en pantalla
+4. **📱 UI Moderna** - Interfaz de chat moderna con burbujas de mensajes
+
 ## 🛠️ Tecnologías Utilizadas
 
 - **React 19** - Biblioteca de UI
 - **Redux Toolkit** - Manejo de estado global
-- **Firebase v11** - Backend as a Service para autenticación y base de datos
-- **Firestore** - Base de datos NoSQL en tiempo real
+- **Firebase v11** - Backend as a Service completo
+  - **Firebase Auth** - Autenticación de usuarios
+  - **Firestore** - Base de datos NoSQL para CRUD
+  - **Realtime Database** - Base de datos en tiempo real para chat
 - **Vite** - Build tool y dev server
 
 ## 🚀 Inicio Rápido
@@ -42,15 +50,19 @@ El proyecto ya incluye una configuración de Firebase de ejemplo que **NO funcio
 4. Habilita **Firestore Database**:
    - Crea una nueva base de datos en modo de prueba
    - Configura las reglas de seguridad según tus necesidades
-5. Ve a Project Settings > General > Your apps
-6. Agrega una nueva Web App
-7. Copia tu configuración real y reemplaza en `src/firebase/config.js`
+5. Habilita **Realtime Database**:
+   - Crea una nueva base de datos en modo de prueba
+   - Configura las reglas de seguridad
+6. Ve a Project Settings > General > Your apps
+7. Agrega una nueva Web App
+8. Copia tu configuración real y reemplaza en `src/firebase/config.js`
 
 **Configuración actual (solo para desarrollo):**
 ```javascript
 const firebaseConfig = {
   apiKey: "AIzaSyBkL9rQ2mX8vK3nP7wE5tA6uY9sD2fH8jK",
   authDomain: "challenge11-auth-app.firebaseapp.com",
+  databaseURL: "https://challenge11-auth-app-default-rtdb.firebaseio.com",
   projectId: "challenge11-auth-app",
   storageBucket: "challenge11-auth-app.appspot.com",
   messagingSenderId: "847291635729",
@@ -70,12 +82,14 @@ src/
 ├── components/
 │   ├── Login.jsx              # Componente de autenticación
 │   ├── Dashboard.jsx          # Dashboard principal con pestañas
-│   └── FirestoreManager.jsx   # Gestor CRUD de Firestore
+│   ├── FirestoreManager.jsx   # Gestor CRUD de Firestore
+│   └── RealtimeChat.jsx       # Chat en tiempo real
 ├── firebase/
 │   └── config.js              # Configuración de Firebase
 ├── redux/
 │   ├── authSlice.js           # Slice de autenticación
 │   ├── firestoreSlice.js      # Slice de operaciones CRUD
+│   ├── realtimeSlice.js       # Slice de chat en tiempo real
 │   └── store.js               # Store de Redux
 ├── hooks/
 │   └── useAuthState.js        # Hook para estado de autenticación
@@ -98,6 +112,13 @@ src/
 4. **UPDATE**: Haz clic en "✏️ Editar" para modificar una tarea
 5. **DELETE**: Haz clic en "🗑️ Eliminar" para borrar una tarea
 
+### Challenge 13 - Chat en Tiempo Real
+1. **Navega** a la pestaña "💬 Chat en Tiempo Real" en el dashboard
+2. **Conectar**: El chat se conecta automáticamente a Firebase Realtime Database
+3. **Enviar**: Escribe mensajes y presiona Enter o el botón "🚀 Enviar"
+4. **Ver en Tiempo Real**: Los mensajes aparecen instantáneamente para todos los usuarios
+5. **Multi-usuario**: Abre múltiples pestañas para simular varios usuarios chateando
+
 ## 🚀 Características
 
 ### Generales
@@ -108,25 +129,36 @@ src/
 - **Redux Integration**: Estado global completo con Redux Toolkit
 
 ### Específicas de Firestore
-- **Operaciones en Tiempo Real**: Los datos se actualizan automáticamente
+- **Operaciones Asíncronas**: Todas las operaciones CRUD son asíncronas
 - **Validación de Formularios**: Validación antes de enviar datos
 - **Timestamps Automáticos**: Fechas de creación y actualización automáticas
 - **Confirmación de Eliminación**: Previene eliminaciones accidentales
-- **Estados de Carga**: Feedback visual durante las operaciones
+
+### Específicas de Chat en Tiempo Real
+- **Mensajería Instantánea**: Los mensajes se sincronizan en tiempo real
+- **Identificación de Usuario**: Cada mensaje muestra quién lo envió
+- **Auto-scroll**: Se desplaza automáticamente a los mensajes más recientes
+- **Indicador de Conexión**: Muestra el estado de conexión en tiempo real
+- **Interfaz de Chat Moderna**: Burbujas de mensajes estilo WhatsApp
+- **Timestamps**: Hora y fecha de cada mensaje
+- **Soporte Multilinea**: Shift+Enter para nueva línea
 
 ## 🔧 Modo Demo
 
-Si no configuras Firebase real, la aplicación mostrará errores de conexión, pero podrás ver toda la UI y el flujo completo implementado para ambos challenges.
+Si no configuras Firebase real, la aplicación mostrará errores de conexión, pero podrás ver toda la UI y el flujo completo implementado para los tres challenges.
 
 ## 🏗️ Arquitectura
 
 - **Autenticación**: Manejo completo del estado de usuario con persistencia
-- **CRUD Operations**: Operaciones asíncronas con Redux Toolkit
-- **Component Structure**: Separación clara entre autenticación y gestión de datos
+- **CRUD Operations**: Operaciones asíncronas con Redux Toolkit sobre Firestore
+- **Real-time Messaging**: Sistema de mensajería usando Firebase Realtime Database
+- **Component Structure**: Separación clara entre autenticación, CRUD y chat
 - **Error Handling**: Manejo robusto de errores en todas las operaciones
+- **State Management**: Redux con múltiples slices para diferentes funcionalidades
 
 ## 📚 Referencias
 
 - [Firebase Auth Web](https://firebase.google.com/docs/auth/web/google-signin?hl=es-419)
 - [Firestore Web](https://firebase.google.com/docs/firestore/quickstart?hl=es-419)
+- [Firebase Realtime Database](https://firebase.google.com/docs/database/web/start?hl=es-419)
 - [Redux Toolkit](https://redux-toolkit.js.org/)
