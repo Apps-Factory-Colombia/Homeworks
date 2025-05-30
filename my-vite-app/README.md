@@ -351,3 +351,107 @@ Después de insertar números, verás automáticamente los tres recorridos:
 ---
 
 **🎯 Challenge 14 Completado** - Implementación completa de árboles binarios con inserción, búsqueda, recorridos y visualización interactiva usando React y react-d3-tree.
+
+# 🌲 Challenge 15 - Árboles N-arios con Sistema de Menús
+
+Este proyecto implementa un **sistema de menús jerárquicos** usando **árboles N-arios** en React según los requisitos del Challenge 15.
+
+## ✅ Funcionalidades Implementadas
+
+### Challenge 15 - Árboles N-arios y Sidebar de Menús
+1. **🌲 Árbol N-ario Completo** - Estructura donde cada nodo puede tener múltiples hijos
+2. **📋 Sistema de Menús Jerárquicos** - Menús y submenús organizados en estructura de árbol
+3. **🎯 Navegación Lateral (Sidebar)** - Interfaz lateral navegable que refleja la estructura del árbol
+4. **🔗 Enlaces y Componentes** - Cada elemento tiene título, enlace y componente asociado
+5. **📂 Expansión/Colapso** - Submenús expandibles y colapsables interactivamente
+6. **🧭 Breadcrumb de Navegación** - Muestra el camino actual en el árbol
+7. **📊 Información en Tiempo Real** - Estadísticas del árbol actualizadas dinámicamente
+
+## 🎯 Cómo Probar el Challenge 15
+
+### 1. Explorar el Menú Lateral
+- **Navegación**: Haz clic en cualquier elemento del sidebar para navegar
+- **Submenús**: Usa las flechas ▶/▼ para expandir/colapsar submenús
+- **Jerarquía**: Observa la indentación que muestra los niveles del árbol
+- **Indicadores**: Los elementos con 🔗 tienen enlaces configurados
+
+### 2. Probar la Funcionalidad del Árbol N-ario
+- **Dashboard**: Nodo raíz con estadísticas y métricas
+- **Perfil**: Información del usuario
+- **Mensajes**: Con submenús (Bandeja de Entrada, Notificaciones)
+- **Configuración**: Con submenús (Cuenta, Seguridad y Privacidad)
+- **Ayuda**: Con submenús (FAQ, Contacto, Tutorial)
+
+### 3. Usar los Controles de Navegación
+- **📂 Expandir Todo**: Abre todos los submenús del árbol
+- **📁 Colapsar Todo**: Cierra todos los submenús (mantiene raíz abierta)
+- **Breadcrumb**: Ve el camino actual desde la raíz hasta el elemento seleccionado
+
+## 🌟 Características del Árbol N-ario
+
+### Diferencias con Árboles Binarios
+- **Múltiples Hijos**: Cada nodo puede tener cualquier cantidad de hijos (no solo 2)
+- **Flexibilidad**: Perfecto para estructuras jerárquicas como menús
+- **Recorridos**: Implementa DFS (Depth-First) y BFS (Breadth-First)
+- **Búsquedas**: Por ID, por título, y caminos completos
+
+### Estructura del Menú Implementada
+```
+Dashboard (📊)
+├── Perfil (👤)
+├── Mensajes (💬)
+│   ├── Bandeja de Entrada (📥)
+│   └── Notificaciones (🔔)
+├── Configuración (⚙️)
+│   ├── Cuenta (👤)
+│   └── Seguridad y Privacidad (🔒)
+└── Ayuda (❓)
+    ├── Preguntas Frecuentes (📋)
+    ├── Contacto (📞)
+    └── Tutorial (🎓)
+```
+
+## 🔧 Estructura del Proyecto Challenge 15
+
+```
+src/
+├── utils/
+│   └── NaryTree.js           # Clase del árbol N-ario con MenuNode
+├── components/
+│   ├── Sidebar.jsx           # Componente del menú lateral
+│   └── MenuComponents.jsx    # Componentes de cada sección del menú
+├── App.jsx                   # Aplicación principal con navegación
+└── main.jsx                  # Punto de entrada
+```
+
+## 📊 Algoritmos Implementados
+
+### Operaciones del Árbol N-ario
+- **Inserción**: O(1) - Agregar hijo a nodo específico
+- **Búsqueda por ID**: O(1) - Usando Map para acceso directo
+- **Búsqueda por título**: O(n) - Recorrido lineal de todos los nodos
+- **DFS/BFS**: O(n) - Visita todos los nodos una vez
+- **Nodos visibles**: O(n) - En el peor caso si todos están expandidos
+
+### Funcionalidades del Sidebar
+- **Posición Fija**: Sidebar fijo de 300px de ancho
+- **Scroll Independiente**: Contenido principal y sidebar se desplazan independientemente
+- **Indicadores Visuales**: Estados hover, selección y expansión
+- **Indentación Dinámica**: Refleja la profundidad del árbol visualmente
+
+## 💡 Conceptos Avanzados
+
+### Estructuras de Datos
+- **Árbol N-ario**: Cada nodo puede tener múltiples hijos
+- **Map para indexación**: Búsqueda rápida por ID
+- **Referencias circulares**: Nodos conocen a sus padres e hijos
+- **Estados de navegación**: Expansión y selección persistentes
+
+### Patrones de Diseño
+- **Component Pattern**: Cada menú tiene su componente React
+- **Observer Pattern**: Actualización automática de estadísticas
+- **Factory Pattern**: Creación dinámica de nodos del menú
+
+---
+
+**🎯 Challenge 15 Completado** - Implementación completa de árboles N-arios con sistema de menús jerárquicos, sidebar navegable y componentes intercambiables en React.
