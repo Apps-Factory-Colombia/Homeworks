@@ -1,0 +1,703 @@
+// ========================================
+// APP STYLES - Challenge 17 CSS Modules
+// ========================================
+
+@import './variables';
+@import './mixins';
+
+// 🌟 ESTILOS GLOBALES PARA EL BODY
+:global(body) {
+  margin: 0;
+  padding: 0;
+  font-family: map-get($font-families, 'sans');
+  background: linear-gradient(135deg, 
+    lighten-color(primary('ultra-light'), 5%) 0%, 
+    lighten-color(secondary('ultra-light'), 5%) 100%);
+  min-height: 100vh;
+  color: gray('gray-900');
+  line-height: line-height('normal');
+}
+
+:global(*) {
+  box-sizing: border-box;
+}
+
+// 🎨 CONTENEDOR PRINCIPAL
+.appContainer {
+  @include fade-in(transition('slow'));
+  font-family: map-get($font-families, 'sans');
+  min-height: 100vh;
+  background: linear-gradient(135deg, 
+    primary('ultra-light') 0%, 
+    secondary('ultra-light') 50%,
+    success('ultra-light') 100%);
+  padding: spacing('xl');
+  position: relative;
+  overflow-x: hidden;
+  
+  // Efecto de partículas de fondo
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(circle at 20% 80%, alpha(primary(), 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, alpha(secondary(), 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, alpha(success(), 0.1) 0%, transparent 50%);
+    z-index: -1;
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @include respond-down('md') {
+    padding: spacing('md');
+  }
+}
+
+// 🎯 HEADER PRINCIPAL
+.header {
+  @include card-base;
+  @include slide-in-from('top', 30px, transition('normal'), 0.2s);
+  margin-bottom: spacing('xl');
+  text-align: center;
+  background: gradient('glass');
+  @include glass-effect(0.15);
+  border: 2px solid alpha(primary(), 0.2);
+  
+  .title {
+    @include text-gradient('primary');
+    margin: 0 0 spacing('sm') 0;
+    font-size: font-size('3xl');
+    font-weight: font-weight('black');
+    letter-spacing: -0.02em;
+    @include text-shadow(primary(), 3px);
+    
+    @include respond-to('lg') {
+      font-size: font-size('4xl');
+    }
+    
+    @include respond-to('xl') {
+      font-size: font-size('5xl');
+    }
+    
+    @include respond-down('md') {
+      font-size: font-size('2xl');
+    }
+  }
+  
+  .subtitle {
+    color: gray('gray-600');
+    font-size: font-size('lg');
+    margin: 0 0 spacing('lg') 0;
+    font-weight: font-weight('medium');
+    
+    @include respond-down('md') {
+      font-size: font-size('base');
+    }
+  }
+  
+  .lastOperation {
+    @include bounce-in(transition('bounce'), 0.5s);
+    margin-top: spacing('lg');
+    padding: spacing('md');
+    background: success('ultra-light');
+    color: success('dark');
+    border-radius: radius('lg');
+    border: 2px solid success('light');
+    font-weight: font-weight('medium');
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '✨';
+      position: absolute;
+      left: spacing('md');
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: font-size('lg');
+      animation: glow 2s infinite;
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, alpha(white, 0.3), transparent);
+      animation: slideShine 2s infinite;
+    }
+  }
+}
+
+// 📊 GRID PRINCIPAL
+.mainGrid {
+  @include grid-auto-fit(400px, spacing('xl'));
+  margin-bottom: spacing('xl');
+  
+  @include respond-down('lg') {
+    grid-template-columns: 1fr;
+    gap: spacing('lg');
+  }
+}
+
+// 🎮 PANEL DE CONTROL
+.controlPanel {
+  @include card-base;
+  @include slide-in-from('left', 40px, transition('normal'), 0.4s);
+  background: gradient('glass');
+  @include glass-effect(0.1);
+  border: 2px solid alpha(primary(), 0.15);
+  
+  .panelTitle {
+    @include flex-center;
+    gap: spacing('sm');
+    color: primary();
+    margin-top: 0;
+    margin-bottom: spacing('xl');
+    font-size: font-size('xl');
+    font-weight: font-weight('bold');
+    
+    &::before {
+      content: '🎮';
+      font-size: font-size('2xl');
+      animation: float 3s ease-in-out infinite;
+    }
+  }
+  
+  .formSection {
+    margin-bottom: spacing('2xl');
+    
+    .sectionTitle {
+      @include flex-center;
+      gap: spacing('sm');
+      color: gray('gray-700');
+      font-size: font-size('lg');
+      font-weight: font-weight('semibold');
+      margin-bottom: spacing('lg');
+      
+      &::after {
+        content: '';
+        flex: 1;
+        height: 2px;
+        background: gradient('primary');
+        border-radius: radius('full');
+        margin-left: spacing('md');
+      }
+    }
+    
+    .inputGroup {
+      @include flex-column;
+      gap: spacing('md');
+      
+      .input {
+        @include input-base;
+        @include hover-lift(2px, 'md');
+        
+        &:focus {
+          border-color: primary();
+          box-shadow: 0 0 0 3px alpha(primary(), 0.15);
+          transform: translateY(-2px);
+        }
+        
+        &::placeholder {
+          color: gray('gray-400');
+          font-style: italic;
+        }
+      }
+      
+      .button {
+        @include button-gradient('primary');
+        font-weight: font-weight('semibold');
+        
+        &:hover {
+          @include pulse(primary());
+        }
+      }
+    }
+  }
+  
+  .controlButtons {
+    @include grid-auto-fit(150px, spacing('md'));
+    margin-bottom: spacing('xl');
+    
+    .exampleButton {
+      @include button-variant(warning(), gray('gray-900'));
+    }
+    
+    .clearButton {
+      @include button-variant(danger());
+    }
+  }
+  
+  .statsCard {
+    @include neumorphism(gray('gray-50'), 'inset');
+    padding: spacing('lg');
+    border-radius: radius('xl');
+    
+    .statsTitle {
+      color: gray('gray-800');
+      margin-top: 0;
+      margin-bottom: spacing('md');
+      font-size: font-size('base');
+      font-weight: font-weight('semibold');
+      @include flex-center;
+      gap: spacing('sm');
+      
+      &::before {
+        content: '📊';
+        font-size: font-size('lg');
+      }
+    }
+    
+    .statsList {
+      @extend %reset-list;
+      
+      .statItem {
+        @include flex-between;
+        padding: spacing('sm') 0;
+        border-bottom: 1px solid gray('gray-200');
+        font-size: font-size('sm');
+        
+        &:last-child {
+          border-bottom: none;
+        }
+        
+        .statLabel {
+          font-weight: font-weight('medium');
+          color: gray('gray-600');
+        }
+        
+        .statValue {
+          font-weight: font-weight('bold');
+          color: primary();
+          font-size: font-size('lg');
+        }
+      }
+    }
+  }
+}
+
+// 🔍 PANEL DE BÚSQUEDA
+.searchPanel {
+  @include card-base;
+  @include slide-in-from('right', 40px, transition('normal'), 0.6s);
+  background: gradient('glass');
+  @include glass-effect(0.1);
+  border: 2px solid alpha(info(), 0.15);
+  
+  .panelTitle {
+    @include flex-center;
+    gap: spacing('sm');
+    color: info();
+    margin-top: 0;
+    margin-bottom: spacing('xl');
+    font-size: font-size('xl');
+    font-weight: font-weight('bold');
+    
+    &::before {
+      content: '🔍';
+      font-size: font-size('2xl');
+      animation: float 3s ease-in-out infinite 1s;
+    }
+  }
+  
+  .searchSection {
+    margin-bottom: spacing('xl');
+    
+    .searchForm {
+      @include flex-center;
+      gap: spacing('md');
+      margin-bottom: spacing('lg');
+      
+      @include respond-down('sm') {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .searchInput {
+        @include input-base;
+        flex: 1;
+        
+        &:focus {
+          border-color: info();
+          box-shadow: 0 0 0 3px alpha(info(), 0.15);
+        }
+      }
+      
+      .searchButton {
+        @include button-variant(info());
+        white-space: nowrap;
+      }
+    }
+    
+    .searchResults {
+      @include fade-in(transition('normal'), 0.3s);
+      background: info('ultra-light');
+      padding: spacing('lg');
+      border-radius: radius('lg');
+      border: 2px solid info('light');
+      
+      .resultsTitle {
+        color: info('dark');
+        margin-top: 0;
+        margin-bottom: spacing('md');
+        font-weight: font-weight('semibold');
+        @include flex-center;
+        gap: spacing('sm');
+        
+        &::before {
+          content: '🎯';
+        }
+      }
+      
+      .resultItem {
+        @include hover-lift(2px, 'sm');
+        padding: spacing('sm');
+        background: gray('white');
+        margin-bottom: spacing('xs');
+        border-radius: radius('md');
+        border: 1px solid info('light');
+        transition: all transition('fast');
+        
+        &:hover {
+          border-color: info();
+          background: info('ultra-light');
+        }
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+  
+  .listSection {
+    margin-bottom: spacing('xl');
+    
+    .listTitle {
+      color: gray('gray-700');
+      font-size: font-size('lg');
+      font-weight: font-weight('semibold');
+      margin-bottom: spacing('md');
+      @include flex-center;
+      gap: spacing('sm');
+    }
+    
+    .scrollableList {
+      @include scroll-gradient('vertical', gray('white'), 15px);
+      max-height: 200px;
+      overflow-y: auto;
+      background: gray('gray-50');
+      padding: spacing('md');
+      border-radius: radius('lg');
+      border: 1px solid gray('gray-200');
+      
+      &::-webkit-scrollbar {
+        width: 6px;
+      }
+      
+      &::-webkit-scrollbar-track {
+        background: gray('gray-100');
+        border-radius: radius('full');
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background: primary();
+        border-radius: radius('full');
+        
+        &:hover {
+          background: primary('dark');
+        }
+      }
+      
+      .listItem {
+        @include hover-lift(1px, 'sm');
+        padding: spacing('sm') spacing('md');
+        background: gray('white');
+        margin-bottom: spacing('xs');
+        border-radius: radius('md');
+        font-size: font-size('sm');
+        transition: all transition('fast');
+        border: 1px solid transparent;
+        
+        &:hover {
+          border-color: primary('light');
+          background: primary('ultra-light');
+        }
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+        
+        .itemName {
+          font-weight: font-weight('semibold');
+          color: gray('gray-800');
+        }
+        
+        .itemDetails {
+          color: gray('gray-600');
+          font-size: font-size('xs');
+          margin-top: spacing('xs');
+        }
+      }
+    }
+    
+    .emptyState {
+      @include flex-center;
+      @include flex-column;
+      gap: spacing('sm');
+      padding: spacing('xl');
+      color: gray('gray-500');
+      font-style: italic;
+      
+      &::before {
+        content: '📭';
+        font-size: font-size('3xl');
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+// 🌐 VISUALIZACIÓN DEL GRAFO
+.graphVisualization {
+  @include card-base;
+  @include slide-in-from('bottom', 50px, transition('slow'), 0.8s);
+  margin-top: spacing('xl');
+  background: gradient('glass');
+  @include glass-effect(0.05);
+  border: 2px solid alpha(success(), 0.15);
+  
+  .graphTitle {
+    @include text-gradient('success');
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: spacing('xl');
+    font-size: font-size('2xl');
+    font-weight: font-weight('bold');
+    @include flex-center;
+    gap: spacing('md');
+    
+    &::before,
+    &::after {
+      content: '🌐';
+      font-size: font-size('3xl');
+      animation: float 4s ease-in-out infinite;
+    }
+    
+    &::after {
+      animation-delay: 2s;
+    }
+  }
+  
+  .graphContainer {
+    @include neumorphism(gray('gray-50'), 'inset');
+    border-radius: radius('xl');
+    @include flex-center;
+    padding: spacing('xl');
+    min-height: 500px;
+    position: relative;
+    overflow: hidden;
+    
+    // Efecto de grid de fondo
+    &::before {
+      content: '';
+      @include cover-absolute;
+      background-image: 
+        linear-gradient(alpha(primary(), 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, alpha(primary(), 0.1) 1px, transparent 1px);
+      background-size: 20px 20px;
+      z-index: 0;
+    }
+    
+    // Contenedor del grafo
+    > * {
+      position: relative;
+      z-index: 1;
+    }
+  }
+  
+  .legend {
+    @include neumorphism(gray('white'), 'normal');
+    margin-top: spacing('xl');
+    padding: spacing('lg');
+    border-radius: radius('lg');
+    
+    .legendTitle {
+      color: gray('gray-800');
+      margin-top: 0;
+      margin-bottom: spacing('md');
+      font-size: font-size('base');
+      font-weight: font-weight('semibold');
+      @include flex-center;
+      gap: spacing('sm');
+      
+      &::before {
+        content: '📋';
+      }
+    }
+    
+    .legendItems {
+      @include flex-center;
+      gap: spacing('2xl');
+      flex-wrap: wrap;
+      
+      @include respond-down('sm') {
+        flex-direction: column;
+        gap: spacing('md');
+      }
+      
+      .legendItem {
+        @include flex-center;
+        gap: spacing('sm');
+        font-size: font-size('sm');
+        
+        .legendIcon {
+          width: 20px;
+          height: 20px;
+          border-radius: radius('sm');
+          
+          &.person {
+            background: graph('person');
+            border-radius: 50%;
+          }
+          
+          &.city {
+            background: graph('city');
+          }
+          
+          &.friendship {
+            height: 3px;
+            background: graph('friendship');
+            border-radius: radius('full');
+          }
+          
+          &.residence {
+            height: 3px;
+            background: graph('residence');
+            border-radius: radius('full');
+          }
+        }
+      }
+    }
+  }
+  
+  .graphTip {
+    text-align: center;
+    color: gray('gray-600');
+    font-size: font-size('sm');
+    margin: spacing('md') 0 0 0;
+    padding: spacing('md');
+    background: warning('ultra-light');
+    border-radius: radius('lg');
+    border: 1px solid warning('light');
+    
+    &::before {
+      content: '💡 ';
+      font-size: font-size('base');
+    }
+  }
+}
+
+// 🚀 ESTADO INICIAL
+.initialState {
+  @include card-base;
+  @include bounce-in(transition('bounce'), 1s);
+  margin-top: spacing('xl');
+  text-align: center;
+  background: gradient('rainbow');
+  color: gray('white');
+  border: none;
+  
+  .initialTitle {
+    margin-top: 0;
+    margin-bottom: spacing('lg');
+    font-size: font-size('2xl');
+    font-weight: font-weight('bold');
+    @include text-shadow(black, 3px);
+  }
+  
+  .initialDescription {
+    font-size: font-size('lg');
+    margin-bottom: spacing('xl');
+    line-height: line-height('relaxed');
+    @include text-shadow(black, 2px);
+  }
+  
+  .initialTip {
+    @include neumorphism(alpha(white, 0.2), 'inset');
+    display: inline-block;
+    padding: spacing('lg') spacing('2xl');
+    border-radius: radius('xl');
+    margin-top: spacing('lg');
+    
+    .tipText {
+      font-weight: font-weight('bold');
+      @include text-shadow(black, 2px);
+      
+      &::before {
+        content: '💡 ';
+        font-size: font-size('xl');
+      }
+    }
+  }
+}
+
+// 🎨 ANIMACIONES PERSONALIZADAS
+@keyframes slideShine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+// 📱 UTILIDADES RESPONSIVAS
+@include respond-down('lg') {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@include respond-down('md') {
+  .appContainer {
+    padding: spacing('md');
+  }
+  
+  .header .title {
+    font-size: font-size('2xl');
+  }
+  
+  .controlPanel,
+  .searchPanel {
+    padding: spacing('lg');
+  }
+}
+
+@include respond-down('sm') {
+  .appContainer {
+    padding: spacing('sm');
+  }
+  
+  .mainGrid {
+    gap: spacing('md');
+  }
+  
+  .header {
+    padding: spacing('lg');
+    
+    .title {
+      font-size: font-size('xl');
+    }
+    
+    .subtitle {
+      font-size: font-size('sm');
+    }
+  }
+} 

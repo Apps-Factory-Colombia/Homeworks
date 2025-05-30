@@ -455,3 +455,279 @@ src/
 ---
 
 **🎯 Challenge 15 Completado** - Implementación completa de árboles N-arios con sistema de menús jerárquicos, sidebar navegable y componentes intercambiables en React.
+
+# 🎨 Challenge 17 - SASS + CSS Modules
+
+Este proyecto implementa el **Challenge 17** que consiste en tomar un challenge previo y aplicar **SASS con CSS Modules** para crear un diseño creativo y moderno. Se utilizó el Challenge 16 (grafos) como base.
+
+## ✅ Funcionalidades Implementadas
+
+### Challenge 17 - SASS con CSS Modules
+1. **🎨 Variables SASS** - Sistema completo de variables para colores, espaciado, tipografía y más
+2. **🔧 Mixins Avanzados** - Mixins para botones, formularios, animaciones, responsive design
+3. **📦 CSS Modules** - Estilos encapsulados y reutilizables
+4. **🌟 Efectos Visuales** - Glass morphism, neumorphism, gradientes y animaciones
+5. **📱 Responsive Design** - Breakpoints y mixins para diferentes dispositivos
+6. **🎯 Funciones SASS** - Funciones para cálculos, colores y utilidades
+7. **🔄 Loops y Placeholders** - Generación automática de clases utilitarias
+8. **🎭 Animaciones CSS** - Keyframes personalizados y efectos de transición
+
+### Características SASS Utilizadas
+
+#### 🎨 Variables y Maps
+```scss
+$primary-colors: (
+  'main': #6366f1,
+  'light': #818cf8,
+  'dark': #4338ca,
+  'ultra-light': #e0e7ff
+);
+
+$spacing: (
+  'xs': 0.25rem,
+  'sm': 0.5rem,
+  'md': 1rem,
+  'lg': 1.5rem,
+  'xl': 2rem
+);
+```
+
+#### 🔧 Mixins Avanzados
+```scss
+@mixin button-gradient($gradient-name) {
+  @include button-base;
+  background: gradient($gradient-name);
+  color: white;
+  
+  &:hover:not(:disabled) {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: shadow('lg');
+  }
+}
+
+@mixin glass-effect($opacity: 0.1) {
+  background: alpha(white, $opacity);
+  backdrop-filter: blur(20px);
+  border: 1px solid alpha(white, 0.2);
+  box-shadow: 0 8px 32px 0 alpha(black, 0.37);
+}
+```
+
+#### 🎯 Funciones Personalizadas
+```scss
+@function primary($variant: 'main') {
+  @return color($primary-colors, $variant);
+}
+
+@function spacing($size: 'md') {
+  @return map-get($spacing, $size);
+}
+
+@function fluid-spacing($min-size, $max-size, $min-width: 320px, $max-width: 1200px) {
+  $slope: ($max-size - $min-size) / ($max-width - $min-width);
+  $intersection: $min-size - $slope * $min-width;
+  @return clamp(#{$min-size}rem, #{$intersection}rem + #{$slope * 100}vw, #{$max-size}rem);
+}
+```
+
+#### 🔄 Loops para Utilidades
+```scss
+@each $name, $value in $spacing {
+  .m-#{$name} { margin: $value !important; }
+  .p-#{$name} { padding: $value !important; }
+}
+
+@each $name, $value in $font-sizes {
+  .text-#{$name} { font-size: $value !important; }
+}
+```
+
+#### 📦 Placeholders Reutilizables
+```scss
+%reset-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+%flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+```
+
+### Efectos Visuales Implementados
+
+#### 🌟 Glass Morphism
+- Fondos translúcidos con `backdrop-filter: blur()`
+- Bordes sutiles con transparencia
+- Efectos de profundidad y capas
+
+#### 🎭 Neumorphism
+- Sombras internas y externas
+- Efectos de relieve y hundimiento
+- Diferentes niveles de profundidad
+
+#### 🌈 Gradientes Dinámicos
+- Gradientes personalizados para diferentes elementos
+- Efectos de arcoíris y cristal
+- Transiciones suaves entre colores
+
+#### ⚡ Animaciones Avanzadas
+- Fade in, slide in, bounce in
+- Efectos de hover y focus
+- Animaciones de carga y pulso
+- Keyframes personalizados
+
+### Responsive Design
+
+#### 📱 Breakpoints
+```scss
+$breakpoints: (
+  'sm': 640px,
+  'md': 768px,
+  'lg': 1024px,
+  'xl': 1280px,
+  '2xl': 1536px
+);
+```
+
+#### 🔧 Mixins Responsivos
+```scss
+@mixin respond-to($breakpoint) {
+  $bp: map-get($breakpoints, $breakpoint);
+  @if $bp {
+    @media (min-width: $bp) {
+      @content;
+    }
+  }
+}
+```
+
+## 🚀 Instalación y Uso
+
+### Prerrequisitos
+- Node.js 16+
+- npm o yarn
+
+### Instalación
+```bash
+# Clonar el repositorio
+git clone <repository-url>
+cd my-vite-app
+
+# Instalar dependencias
+npm install
+
+# Instalar SASS
+npm install -D sass
+
+# Instalar dependencias del grafo
+npm install react-d3-graph d3 --legacy-peer-deps
+```
+
+### Ejecutar la aplicación
+```bash
+npm run dev
+```
+
+La aplicación estará disponible en `http://localhost:5173`
+
+## 📁 Estructura del Proyecto
+
+```
+src/
+├── styles/
+│   ├── variables.scss      # Variables, funciones y configuración
+│   ├── mixins.scss         # Mixins, placeholders y utilidades
+│   └── App.module.scss     # Estilos del componente principal
+├── utils/
+│   └── Graph.js           # Lógica del grafo (Challenge 16)
+├── App.jsx                # Componente principal con CSS Modules
+└── main.jsx              # Punto de entrada
+```
+
+## 🎨 Características del Diseño
+
+### 🌟 Efectos Visuales
+- **Glass Morphism**: Paneles translúcidos con blur
+- **Neumorphism**: Efectos de relieve en tarjetas
+- **Gradientes**: Fondos dinámicos y coloridos
+- **Animaciones**: Transiciones suaves y efectos hover
+
+### 📱 Responsive
+- **Mobile First**: Diseño optimizado para móviles
+- **Breakpoints**: Adaptación a diferentes tamaños
+- **Grid Flexible**: Layout que se adapta automáticamente
+
+### 🎯 Interactividad
+- **Hover Effects**: Efectos al pasar el mouse
+- **Focus States**: Estados de foco accesibles
+- **Loading States**: Animaciones de carga
+- **Micro-interactions**: Pequeñas animaciones que mejoran UX
+
+## 🔧 Tecnologías Utilizadas
+
+- **React 18** - Framework de UI
+- **Vite** - Build tool y dev server
+- **SASS** - Preprocesador CSS
+- **CSS Modules** - Estilos encapsulados
+- **react-d3-graph** - Visualización de grafos
+- **D3.js** - Manipulación de datos
+
+## 📊 Conceptos SASS Demostrados
+
+### Variables y Maps ✅
+- Paletas de colores organizadas
+- Sistemas de espaciado consistentes
+- Configuración de tipografía
+
+### Mixins ✅
+- Mixins para componentes reutilizables
+- Mixins para responsive design
+- Mixins para animaciones
+
+### Funciones ✅
+- Funciones para acceso a variables
+- Cálculos dinámicos
+- Utilidades de color
+
+### Loops ✅
+- Generación automática de clases
+- Iteración sobre maps
+- Creación de utilidades
+
+### Placeholders ✅
+- Estilos base reutilizables
+- Patrones comunes
+- Optimización de CSS
+
+### Anidación ✅
+- Estructura jerárquica
+- Pseudo-elementos y pseudo-clases
+- Modificadores BEM
+
+## 🎯 Mejoras Implementadas
+
+1. **Sistema de Design Tokens** - Variables organizadas por categorías
+2. **Arquitectura Modular** - Separación clara de responsabilidades
+3. **Performance** - CSS optimizado y minificado
+4. **Accesibilidad** - Estados de foco y contraste adecuado
+5. **Mantenibilidad** - Código SASS bien estructurado y documentado
+
+## 🌟 Características Destacadas
+
+- **Creatividad**: Diseño único con efectos visuales modernos
+- **Funcionalidad**: Mantiene toda la funcionalidad del Challenge 16
+- **Performance**: CSS optimizado con SASS
+- **Responsive**: Adaptable a todos los dispositivos
+- **Accesible**: Cumple estándares de accesibilidad web
+
+---
+
+**Desarrollado con ❤️ usando SASS y CSS Modules**

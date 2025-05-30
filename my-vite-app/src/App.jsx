@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Graph } from 'react-d3-graph';
 import GraphClass from './utils/Graph';
+import styles from './styles/App.module.scss';
 
 function App() {
   const [graph] = useState(() => new GraphClass());
@@ -159,18 +160,18 @@ function App() {
     width: 800,
     height: 500,
     node: {
-      color: '#007bff',
+      color: '#6366f1',
       size: 400,
-      highlightStrokeColor: '#ff6b6b',
+      highlightStrokeColor: '#f59e0b',
       highlightStrokeWidth: 3,
-      highlightColor: '#ff6b6b',
+      highlightColor: '#f59e0b',
       labelProperty: 'name',
       renderLabel: true,
       fontSize: 12,
       fontWeight: 'bold'
     },
     link: {
-      highlightColor: '#ff6b6b',
+      highlightColor: '#f59e0b',
       strokeWidth: 2
     },
     d3: {
@@ -187,78 +188,39 @@ function App() {
   }, []);
 
   return (
-    <div style={{
-      fontFamily: 'Arial, sans-serif',
-      minHeight: '100vh',
-      backgroundColor: '#f8f9fa',
-      padding: '20px'
-    }}>
+    <div className={styles.appContainer}>
       {/* Header */}
-      <div style={{
-        backgroundColor: 'white',
-        borderRadius: '12px',
-        boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-        padding: '30px',
-        marginBottom: '20px'
-      }}>
-        <h1 style={{
-          margin: '0 0 10px 0',
-          color: '#333',
-          fontSize: '32px',
-          textAlign: 'center'
-        }}>
-          🌐 Challenge 16 - Grafos de Personas y Ciudades
+      <div className={styles.header}>
+        <h1 className={styles.title}>
+          🌐 Challenge 17 - SASS + CSS Modules
         </h1>
-        <p style={{
-          textAlign: 'center',
-          color: '#666',
-          fontSize: '16px',
-          margin: 0
-        }}>
-          Sistema completo de grafos con personas, ciudades y amistades usando react-d3-graph
+        <p className={styles.subtitle}>
+          Grafos de personas y ciudades con diseño creativo usando SASS
         </p>
 
         {lastOperation && (
-          <div style={{
-            marginTop: '15px',
-            padding: '10px',
-            backgroundColor: '#d4edda',
-            color: '#155724',
-            borderRadius: '6px',
-            textAlign: 'center',
-            border: '1px solid #c3e6cb'
-          }}>
-            ✅ {lastOperation}
+          <div className={styles.lastOperation}>
+            {lastOperation}
           </div>
         )}
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+      <div className={styles.mainGrid}>
 
         {/* Panel de Control */}
-        <div style={{
-          backgroundColor: 'white',
-          borderRadius: '12px',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-          padding: '30px'
-        }}>
-          <h2 style={{ color: '#333', marginTop: 0 }}>🎮 Panel de Control</h2>
+        <div className={styles.controlPanel}>
+          <h2 className={styles.panelTitle}>Panel de Control</h2>
 
           {/* Agregar Persona */}
-          <div style={{ marginBottom: '25px' }}>
-            <h3 style={{ color: '#555', fontSize: '18px' }}>👤 Agregar Persona</h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <div className={styles.formSection}>
+            <h3 className={styles.sectionTitle}>👤 Agregar Persona</h3>
+            <div className={styles.inputGroup}>
               <input
                 type="text"
                 value={personName}
                 onChange={(e) => setPersonName(e.target.value)}
                 placeholder="Nombre completo"
-                style={{
-                  padding: '12px',
-                  border: '2px solid #ddd',
-                  borderRadius: '6px',
-                  fontSize: '14px'
-                }}
+                className={styles.input}
               />
               <input
                 type="number"
@@ -267,37 +229,18 @@ function App() {
                 placeholder="Edad"
                 min="0"
                 max="150"
-                style={{
-                  padding: '12px',
-                  border: '2px solid #ddd',
-                  borderRadius: '6px',
-                  fontSize: '14px'
-                }}
+                className={styles.input}
               />
               <input
                 type="text"
                 value={personCity}
                 onChange={(e) => setPersonCity(e.target.value)}
                 placeholder="Ciudad donde vive"
-                style={{
-                  padding: '12px',
-                  border: '2px solid #ddd',
-                  borderRadius: '6px',
-                  fontSize: '14px'
-                }}
+                className={styles.input}
               />
               <button
                 onClick={handleAddPerson}
-                style={{
-                  padding: '12px 20px',
-                  backgroundColor: '#007bff',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '6px',
-                  cursor: 'pointer',
-                  fontSize: '14px',
-                  fontWeight: 'bold'
-                }}
+                className={styles.button}
               >
                 ➕ Agregar Persona
               </button>
@@ -305,80 +248,46 @@ function App() {
           </div>
 
           {/* Agregar Ciudad */}
-          <div style={{ marginBottom: '25px' }}>
-            <h3 style={{ color: '#555', fontSize: '18px' }}>🏙️ Agregar Ciudad</h3>
-            <div style={{ display: 'flex', gap: '10px' }}>
+          <div className={styles.formSection}>
+            <h3 className={styles.sectionTitle}>🏙️ Agregar Ciudad</h3>
+            <div className={styles.inputGroup}>
               <input
                 type="text"
                 value={cityName}
                 onChange={(e) => setCityName(e.target.value)}
                 placeholder="Nombre de la ciudad"
-                style={{
-                  flex: 1,
-                  padding: '12px',
-                  border: '2px solid #ddd',
-                  borderRadius: '6px',
-                  fontSize: '14px'
-                }}
+                className={styles.input}
               />
               <button
                 onClick={handleAddCity}
-                style={{
-                  padding: '12px 20px',
-                  backgroundColor: '#28a745',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '6px',
-                  cursor: 'pointer',
-                  fontSize: '14px',
-                  fontWeight: 'bold'
-                }}
+                className={styles.button}
               >
-                ➕ Agregar
+                ➕ Agregar Ciudad
               </button>
             </div>
           </div>
 
           {/* Agregar Amistad */}
-          <div style={{ marginBottom: '25px' }}>
-            <h3 style={{ color: '#555', fontSize: '18px' }}>🤝 Crear Amistad</h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <div className={styles.formSection}>
+            <h3 className={styles.sectionTitle}>🤝 Crear Amistad</h3>
+            <div className={styles.inputGroup}>
               <input
                 type="text"
                 value={friend1}
                 onChange={(e) => setFriend1(e.target.value)}
                 placeholder="Nombre de la primera persona"
-                style={{
-                  padding: '12px',
-                  border: '2px solid #ddd',
-                  borderRadius: '6px',
-                  fontSize: '14px'
-                }}
+                className={styles.input}
               />
               <input
                 type="text"
                 value={friend2}
                 onChange={(e) => setFriend2(e.target.value)}
                 placeholder="Nombre de la segunda persona"
-                style={{
-                  padding: '12px',
-                  border: '2px solid #ddd',
-                  borderRadius: '6px',
-                  fontSize: '14px'
-                }}
+                className={styles.input}
               />
               <button
                 onClick={handleAddFriendship}
-                style={{
-                  padding: '12px 20px',
-                  backgroundColor: '#ff6b6b',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '6px',
-                  cursor: 'pointer',
-                  fontSize: '14px',
-                  fontWeight: 'bold'
-                }}
+                className={styles.button}
               >
                 🤝 Crear Amistad
               </button>
@@ -386,99 +295,63 @@ function App() {
           </div>
 
           {/* Controles */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '10px',
-            marginBottom: '25px'
-          }}>
+          <div className={styles.controlButtons}>
             <button
               onClick={loadExampleData}
-              style={{
-                padding: '12px',
-                backgroundColor: '#ffc107',
-                color: '#212529',
-                border: 'none',
-                borderRadius: '6px',
-                cursor: 'pointer',
-                fontSize: '14px',
-                fontWeight: 'bold'
-              }}
+              className={styles.exampleButton}
             >
               📝 Datos de Ejemplo
             </button>
             <button
               onClick={clearGraph}
-              style={{
-                padding: '12px',
-                backgroundColor: '#dc3545',
-                color: 'white',
-                border: 'none',
-                borderRadius: '6px',
-                cursor: 'pointer',
-                fontSize: '14px',
-                fontWeight: 'bold'
-              }}
+              className={styles.clearButton}
             >
               🗑️ Limpiar Grafo
             </button>
           </div>
 
           {/* Estadísticas */}
-          <div style={{
-            backgroundColor: '#f8f9fa',
-            padding: '15px',
-            borderRadius: '8px',
-            border: '1px solid #dee2e6'
-          }}>
-            <h3 style={{ color: '#333', marginTop: 0, fontSize: '16px' }}>📊 Estadísticas del Grafo</h3>
-            <div style={{ fontSize: '14px', color: '#666' }}>
-              <div><strong>Nodos totales:</strong> {stats.totalNodes}</div>
-              <div><strong>Conexiones:</strong> {stats.totalEdges}</div>
-              <div><strong>Ciudades:</strong> {stats.cities}</div>
-              <div><strong>Personas:</strong> {stats.people}</div>
-            </div>
+          <div className={styles.statsCard}>
+            <h3 className={styles.statsTitle}>Estadísticas del Grafo</h3>
+            <ul className={styles.statsList}>
+              <li className={styles.statItem}>
+                <span className={styles.statLabel}>Nodos totales:</span>
+                <span className={styles.statValue}>{stats.totalNodes}</span>
+              </li>
+              <li className={styles.statItem}>
+                <span className={styles.statLabel}>Conexiones:</span>
+                <span className={styles.statValue}>{stats.totalEdges}</span>
+              </li>
+              <li className={styles.statItem}>
+                <span className={styles.statLabel}>Ciudades:</span>
+                <span className={styles.statValue}>{stats.cities}</span>
+              </li>
+              <li className={styles.statItem}>
+                <span className={styles.statLabel}>Personas:</span>
+                <span className={styles.statValue}>{stats.people}</span>
+              </li>
+            </ul>
           </div>
         </div>
 
         {/* Panel de Búsqueda e Información */}
-        <div style={{
-          backgroundColor: 'white',
-          borderRadius: '12px',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-          padding: '30px'
-        }}>
-          <h2 style={{ color: '#333', marginTop: 0 }}>🔍 Búsqueda y Consultas</h2>
+        <div className={styles.searchPanel}>
+          <h2 className={styles.panelTitle}>Búsqueda y Consultas</h2>
 
           {/* Buscar personas en ciudad */}
-          <div style={{ marginBottom: '25px' }}>
-            <h3 style={{ color: '#555', fontSize: '18px' }}>🏙️ Personas por Ciudad</h3>
-            <div style={{ display: 'flex', gap: '10px', marginBottom: '15px' }}>
+          <div className={styles.searchSection}>
+            <h3 className={styles.sectionTitle}>🏙️ Personas por Ciudad</h3>
+            <div className={styles.searchForm}>
               <input
                 type="text"
                 value={searchCity}
                 onChange={(e) => setSearchCity(e.target.value)}
                 placeholder="Nombre de la ciudad"
-                style={{
-                  flex: 1,
-                  padding: '12px',
-                  border: '2px solid #ddd',
-                  borderRadius: '6px',
-                  fontSize: '14px'
-                }}
+                className={styles.searchInput}
               />
               <button
                 onClick={handleSearchPeopleInCity}
-                style={{
-                  padding: '12px 20px',
-                  backgroundColor: '#17a2b8',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '6px',
-                  cursor: 'pointer',
-                  fontSize: '14px',
-                  fontWeight: 'bold'
-                }}
+                className={styles.searchButton}
               >
                 🔍 Buscar
               </button>
@@ -486,23 +359,12 @@ function App() {
 
             {/* Resultados de búsqueda */}
             {searchResults.length > 0 && (
-              <div style={{
-                backgroundColor: '#e7f3ff',
-                padding: '15px',
-                borderRadius: '8px',
-                border: '1px solid #b8daff'
-              }}>
-                <h4 style={{ color: '#0056b3', marginTop: 0 }}>
+              <div className={styles.searchResults}>
+                <h4 className={styles.resultsTitle}>
                   Resultados ({searchResults.length} personas):
                 </h4>
                 {searchResults.map((person, index) => (
-                  <div key={index} style={{
-                    padding: '8px',
-                    backgroundColor: 'white',
-                    marginBottom: '5px',
-                    borderRadius: '4px',
-                    border: '1px solid #cce7ff'
-                  }}>
+                  <div key={index} className={styles.resultItem}>
                     <strong>{person.name}</strong> - {person.age} años
                   </div>
                 ))}
@@ -511,28 +373,17 @@ function App() {
           </div>
 
           {/* Lista de ciudades */}
-          <div style={{ marginBottom: '25px' }}>
-            <h3 style={{ color: '#555', fontSize: '18px' }}>🏙️ Ciudades Disponibles</h3>
-            <div style={{
-              maxHeight: '150px',
-              overflow: 'auto',
-              backgroundColor: '#f8f9fa',
-              padding: '10px',
-              borderRadius: '6px',
-              border: '1px solid #dee2e6'
-            }}>
+          <div className={styles.listSection}>
+            <h3 className={styles.listTitle}>🏙️ Ciudades Disponibles</h3>
+            <div className={styles.scrollableList}>
               {graph.getAllCities().length === 0 ? (
-                <p style={{ color: '#666', margin: 0 }}>No hay ciudades registradas</p>
+                <div className={styles.emptyState}>
+                  No hay ciudades registradas
+                </div>
               ) : (
                 graph.getAllCities().map((city, index) => (
-                  <div key={index} style={{
-                    padding: '5px 10px',
-                    backgroundColor: 'white',
-                    marginBottom: '3px',
-                    borderRadius: '4px',
-                    fontSize: '14px'
-                  }}>
-                    🏙️ {city.name}
+                  <div key={index} className={styles.listItem}>
+                    <div className={styles.itemName}>🏙️ {city.name}</div>
                   </div>
                 ))
               )}
@@ -540,34 +391,22 @@ function App() {
           </div>
 
           {/* Lista de personas */}
-          <div>
-            <h3 style={{ color: '#555', fontSize: '18px' }}>👥 Personas Registradas</h3>
-            <div style={{
-              maxHeight: '200px',
-              overflow: 'auto',
-              backgroundColor: '#f8f9fa',
-              padding: '10px',
-              borderRadius: '6px',
-              border: '1px solid #dee2e6'
-            }}>
+          <div className={styles.listSection}>
+            <h3 className={styles.listTitle}>👥 Personas Registradas</h3>
+            <div className={styles.scrollableList}>
               {graph.getAllPeople().length === 0 ? (
-                <p style={{ color: '#666', margin: 0 }}>No hay personas registradas</p>
+                <div className={styles.emptyState}>
+                  No hay personas registradas
+                </div>
               ) : (
                 graph.getAllPeople().map((person, index) => {
                   const city = graph.getAllCities().find(c => c.id === person.cityId);
                   return (
-                    <div key={index} style={{
-                      padding: '8px 10px',
-                      backgroundColor: 'white',
-                      marginBottom: '3px',
-                      borderRadius: '4px',
-                      fontSize: '14px'
-                    }}>
-                      <strong>👤 {person.name}</strong> ({person.age} años)
-                      <br />
-                      <small style={{ color: '#666' }}>
+                    <div key={index} className={styles.listItem}>
+                      <div className={styles.itemName}>👤 {person.name} ({person.age} años)</div>
+                      <div className={styles.itemDetails}>
                         📍 {city ? city.name : 'Ciudad desconocida'}
-                      </small>
+                      </div>
                     </div>
                   );
                 })
@@ -579,25 +418,11 @@ function App() {
 
       {/* Visualización del Grafo */}
       {graphData.nodes.length > 0 && (
-        <div style={{
-          backgroundColor: 'white',
-          borderRadius: '12px',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-          padding: '30px',
-          marginTop: '20px'
-        }}>
-          <h2 style={{ color: '#333', marginTop: 0, textAlign: 'center' }}>
-            🌐 Visualización del Grafo
+        <div className={styles.graphVisualization}>
+          <h2 className={styles.graphTitle}>
+            Visualización del Grafo
           </h2>
-          <div style={{
-            border: '2px solid #e9ecef',
-            borderRadius: '8px',
-            backgroundColor: '#f8f9fa',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: '20px'
-          }}>
+          <div className={styles.graphContainer}>
             <Graph
               id="graph-id"
               data={graphData}
@@ -606,90 +431,47 @@ function App() {
           </div>
 
           {/* Leyenda */}
-          <div style={{
-            marginTop: '20px',
-            padding: '15px',
-            backgroundColor: '#f8f9fa',
-            borderRadius: '8px',
-            border: '1px solid #dee2e6'
-          }}>
-            <h4 style={{ color: '#333', marginTop: 0, fontSize: '16px' }}>📋 Leyenda</h4>
-            <div style={{ display: 'flex', gap: '30px', fontSize: '14px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <div style={{
-                  width: '20px',
-                  height: '20px',
-                  borderRadius: '50%',
-                  backgroundColor: '#007bff'
-                }}></div>
+          <div className={styles.legend}>
+            <h4 className={styles.legendTitle}>Leyenda</h4>
+            <div className={styles.legendItems}>
+              <div className={styles.legendItem}>
+                <div className={`${styles.legendIcon} ${styles.person}`}></div>
                 <span>👤 Personas</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <div style={{
-                  width: '20px',
-                  height: '20px',
-                  backgroundColor: '#28a745'
-                }}></div>
+              <div className={styles.legendItem}>
+                <div className={`${styles.legendIcon} ${styles.city}`}></div>
                 <span>🏙️ Ciudades</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <div style={{
-                  width: '30px',
-                  height: '3px',
-                  backgroundColor: '#ff6b6b'
-                }}></div>
+              <div className={styles.legendItem}>
+                <div className={`${styles.legendIcon} ${styles.friendship}`}></div>
                 <span>🤝 Amistades</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <div style={{
-                  width: '30px',
-                  height: '3px',
-                  backgroundColor: '#6c757d'
-                }}></div>
+              <div className={styles.legendItem}>
+                <div className={`${styles.legendIcon} ${styles.residence}`}></div>
                 <span>📍 Vive en</span>
               </div>
             </div>
           </div>
 
-          <p style={{
-            textAlign: 'center',
-            color: '#666',
-            fontSize: '14px',
-            marginBottom: 0,
-            marginTop: '10px'
-          }}>
-            💡 Haz clic en los nodos para resaltarlos. Abre la consola (F12) para ver logs detallados.
+          <p className={styles.graphTip}>
+            Haz clic en los nodos para resaltarlos. Abre la consola (F12) para ver logs detallados.
           </p>
         </div>
       )}
 
       {/* Instrucciones iniciales */}
       {graphData.nodes.length === 0 && (
-        <div style={{
-          backgroundColor: 'white',
-          borderRadius: '12px',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-          padding: '30px',
-          marginTop: '20px',
-          textAlign: 'center'
-        }}>
-          <h3 style={{ color: '#333' }}>🚀 ¡Comienza a crear tu grafo!</h3>
-          <p style={{ color: '#666', fontSize: '16px' }}>
+        <div className={styles.initialState}>
+          <h3 className={styles.initialTitle}>🚀 ¡Comienza a crear tu grafo!</h3>
+          <p className={styles.initialDescription}>
             Usa los controles del panel izquierdo para agregar personas, ciudades y amistades.
             <br />
             O carga los datos de ejemplo para ver el grafo en acción.
           </p>
-          <div style={{
-            display: 'inline-block',
-            padding: '15px 30px',
-            backgroundColor: '#e7f3ff',
-            borderRadius: '8px',
-            border: '2px solid #007bff',
-            marginTop: '15px'
-          }}>
-            <strong style={{ color: '#007bff' }}>
-              💡 Presiona F12 para ver los logs detallados del grafo en la consola
-            </strong>
+          <div className={styles.initialTip}>
+            <div className={styles.tipText}>
+              Presiona F12 para ver los logs detallados del grafo en la consola
+            </div>
           </div>
         </div>
       )}

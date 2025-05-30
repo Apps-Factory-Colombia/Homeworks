@@ -1,0 +1,294 @@
+// ========================================
+// VARIABLES SASS - Challenge 17
+// ========================================
+
+// 🎨 PALETA DE COLORES
+$primary-colors: (
+  'main': #6366f1,
+  'light': #818cf8,
+  'dark': #4338ca,
+  'ultra-light': #e0e7ff
+);
+
+$secondary-colors: (
+  'main': #f59e0b,
+  'light': #fbbf24,
+  'dark': #d97706,
+  'ultra-light': #fef3c7
+);
+
+$success-colors: (
+  'main': #10b981,
+  'light': #34d399,
+  'dark': #059669,
+  'ultra-light': #d1fae5
+);
+
+$danger-colors: (
+  'main': #ef4444,
+  'light': #f87171,
+  'dark': #dc2626,
+  'ultra-light': #fee2e2
+);
+
+$warning-colors: (
+  'main': #f59e0b,
+  'light': #fbbf24,
+  'dark': #d97706,
+  'ultra-light': #fef3c7
+);
+
+$info-colors: (
+  'main': #3b82f6,
+  'light': #60a5fa,
+  'dark': #2563eb,
+  'ultra-light': #dbeafe
+);
+
+// 🌈 COLORES NEUTRALES
+$gray-scale: (
+  'white': #ffffff,
+  'gray-50': #f9fafb,
+  'gray-100': #f3f4f6,
+  'gray-200': #e5e7eb,
+  'gray-300': #d1d5db,
+  'gray-400': #9ca3af,
+  'gray-500': #6b7280,
+  'gray-600': #4b5563,
+  'gray-700': #374151,
+  'gray-800': #1f2937,
+  'gray-900': #111827,
+  'black': #000000
+);
+
+// 🌐 COLORES ESPECÍFICOS DEL GRAFO
+$graph-colors: (
+  'person': #6366f1,
+  'city': #10b981,
+  'friendship': #ef4444,
+  'residence': #6b7280,
+  'node-highlight': #f59e0b,
+  'node-shadow': rgba(99, 102, 241, 0.3)
+);
+
+// 📏 ESPACIADO
+$spacing: (
+  'xs': 0.25rem,   // 4px
+  'sm': 0.5rem,    // 8px
+  'md': 1rem,      // 16px
+  'lg': 1.5rem,    // 24px
+  'xl': 2rem,      // 32px
+  '2xl': 2.5rem,   // 40px
+  '3xl': 3rem,     // 48px
+  '4xl': 4rem,     // 64px
+  '5xl': 5rem      // 80px
+);
+
+// 📐 BORDER RADIUS
+$border-radius: (
+  'none': 0,
+  'sm': 0.125rem,   // 2px
+  'md': 0.375rem,   // 6px
+  'lg': 0.5rem,     // 8px
+  'xl': 0.75rem,    // 12px
+  '2xl': 1rem,      // 16px
+  '3xl': 1.5rem,    // 24px
+  'full': 9999px
+);
+
+// 🔤 TIPOGRAFÍA
+$font-families: (
+  'sans': ('Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'),
+  'serif': ('Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'),
+  'mono': ('Fira Code', 'Monaco', 'Consolas', 'Ubuntu Mono', 'monospace')
+);
+
+$font-sizes: (
+  'xs': 0.75rem,    // 12px
+  'sm': 0.875rem,   // 14px
+  'base': 1rem,     // 16px
+  'lg': 1.125rem,   // 18px
+  'xl': 1.25rem,    // 20px
+  '2xl': 1.5rem,    // 24px
+  '3xl': 1.875rem,  // 30px
+  '4xl': 2.25rem,   // 36px
+  '5xl': 3rem,      // 48px
+  '6xl': 3.75rem,   // 60px
+  '7xl': 4.5rem,    // 72px
+  '8xl': 6rem,      // 96px
+  '9xl': 8rem       // 128px
+);
+
+$font-weights: (
+  'thin': 100,
+  'light': 300,
+  'normal': 400,
+  'medium': 500,
+  'semibold': 600,
+  'bold': 700,
+  'extrabold': 800,
+  'black': 900
+);
+
+$line-heights: (
+  'none': 1,
+  'tight': 1.25,
+  'snug': 1.375,
+  'normal': 1.5,
+  'relaxed': 1.625,
+  'loose': 2
+);
+
+// 📱 BREAKPOINTS RESPONSIVOS
+$breakpoints: (
+  'sm': 640px,
+  'md': 768px,
+  'lg': 1024px,
+  'xl': 1280px,
+  '2xl': 1536px
+);
+
+// ⚡ Z-INDEX
+$z-index: (
+  'dropdown': 1000,
+  'sticky': 1020,
+  'fixed': 1030,
+  'modal-backdrop': 1040,
+  'modal': 1050,
+  'popover': 1060,
+  'tooltip': 1070
+);
+
+// 🎯 TRANSICIONES
+$transitions: (
+  'fast': 150ms ease-in-out,
+  'normal': 250ms ease-in-out,
+  'slow': 350ms ease-in-out,
+  'bounce': 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)
+);
+
+// 📦 SOMBRAS
+$shadows: (
+  'sm': 0 1px 2px 0 rgba(0, 0, 0, 0.05),
+  'md': 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  'lg': 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+  'xl': 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+  '2xl': 0 25px 50px -12px rgba(0, 0, 0, 0.25),
+  'inner': inset 0 2px 4px 0 rgba(0, 0, 0, 0.06),
+  'none': none
+);
+
+// 🌟 GRADIENTES
+$gradients: (
+  'primary': linear-gradient(135deg, map-get($primary-colors, 'main'), map-get($primary-colors, 'light')),
+  'secondary': linear-gradient(135deg, map-get($secondary-colors, 'main'), map-get($secondary-colors, 'light')),
+  'success': linear-gradient(135deg, map-get($success-colors, 'main'), map-get($success-colors, 'light')),
+  'danger': linear-gradient(135deg, map-get($danger-colors, 'main'), map-get($danger-colors, 'light')),
+  'rainbow': linear-gradient(90deg, #ff0000, #ff8000, #ffff00, #80ff00, #00ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff, #ff0080),
+  'glass': linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))
+);
+
+// 🎨 FUNCIONES SASS
+@function color($color-map, $variant: 'main') {
+  @return map-get($color-map, $variant);
+}
+
+@function primary($variant: 'main') {
+  @return color($primary-colors, $variant);
+}
+
+@function secondary($variant: 'main') {
+  @return color($secondary-colors, $variant);
+}
+
+@function success($variant: 'main') {
+  @return color($success-colors, $variant);
+}
+
+@function danger($variant: 'main') {
+  @return color($danger-colors, $variant);
+}
+
+@function warning($variant: 'main') {
+  @return color($warning-colors, $variant);
+}
+
+@function info($variant: 'main') {
+  @return color($info-colors, $variant);
+}
+
+@function gray($variant: 'gray-500') {
+  @return color($gray-scale, $variant);
+}
+
+@function graph($variant: 'person') {
+  @return color($graph-colors, $variant);
+}
+
+@function spacing($size: 'md') {
+  @return map-get($spacing, $size);
+}
+
+@function radius($size: 'md') {
+  @return map-get($border-radius, $size);
+}
+
+@function font-size($size: 'base') {
+  @return map-get($font-sizes, $size);
+}
+
+@function font-weight($weight: 'normal') {
+  @return map-get($font-weights, $weight);
+}
+
+@function line-height($height: 'normal') {
+  @return map-get($line-heights, $height);
+}
+
+@function shadow($size: 'md') {
+  @return map-get($shadows, $size);
+}
+
+@function transition($speed: 'normal') {
+  @return map-get($transitions, $speed);
+}
+
+@function gradient($name: 'primary') {
+  @return map-get($gradients, $name);
+}
+
+@function z-index($layer: 'modal') {
+  @return map-get($z-index, $layer);
+}
+
+// 📐 FUNCIÓN PARA CALCULAR REM
+@function rem($px) {
+  @return #{$px / 16}rem;
+}
+
+// 📐 FUNCIÓN PARA CALCULAR EM
+@function em($px, $base: 16) {
+  @return #{$px / $base}em;
+}
+
+// 🎯 FUNCIÓN PARA OSCURECER COLORES
+@function darken-color($color, $percentage: 10%) {
+  @return darken($color, $percentage);
+}
+
+// 🎯 FUNCIÓN PARA ACLARAR COLORES
+@function lighten-color($color, $percentage: 10%) {
+  @return lighten($color, $percentage);
+}
+
+// 🌟 FUNCIÓN PARA TRANSPARENCIA
+@function alpha($color, $opacity: 0.5) {
+  @return rgba($color, $opacity);
+}
+
+// 📏 FUNCIÓN PARA ESPACIADO FLUIDO
+@function fluid-spacing($min-size, $max-size, $min-width: 320, $max-width: 1200) {
+  $slope: ($max-size - $min-size) / ($max-width - $min-width);
+  $intersection: -$min-width * $slope + $min-size;
+  @return clamp(#{$min-size}rem, #{$intersection}rem + #{$slope * 100}vw, #{$max-size}rem);
+} 
